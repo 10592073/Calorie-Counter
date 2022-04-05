@@ -12,3 +12,10 @@
     font-size: xx-large;
     text-align: left;
 }
+
+#bg{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('static/images/bg.jpg');
+    background-attachment:fixed;
+}
