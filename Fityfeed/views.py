@@ -1,3 +1,4 @@
+from email import message
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -48,6 +49,14 @@ def fooditem(request):
               'snacks':snacks,
             }
     return render(request,'fooditem.html',context)
+
+@login_required(login_url='login')
+def fooditemDelete(request, id):
+    try:
+        Fooditem.objects.get(id=id).delete()
+    except:
+        pass
+    return redirect('fooditem')
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
@@ -122,7 +131,28 @@ def userPage(request):
 def addFooditem(request):
     user=request.user
     cust=user.customer
+    fooditems=Fooditem.objects.filter()
+    myfilter = fooditemFilter(request.GET,queryset=fooditems)
+    fooditems=myfilter.qs
+    total=UserFooditem.objects.all()
+    myfooditems=total.filter(customer=cust)
+    cnt=myfooditems.count()
+    querysetFood=[]
+    for food in myfooditems:
+        querysetFood.append(food.fooditem.all())
+    finalFoodItems=[]
+    for items in querysetFood:
+        for food_items in items:
+            finalFoodItems.append(food_items)
+    totalCalories=0
+    for foods in finalFoodItems:
+        totalCalories+=foods.calorie
+    CalorieLeft=2000-totalCalories
+    
     if request.method=="POST":
+        if totalCalories>=2000:
+            messages.error(request, 'Your calorie limit exceeded the limit of 2000')
+            return redirect('addFooditem')
         form =addUserFooditem(request.POST)
         if form.is_valid():
             form.save()
@@ -130,4 +160,13 @@ def addFooditem(request):
     form=addUserFooditem()
     context={'form':form}
     return render(request,'addUserFooditem.html',context)
+
+@login_required(login_url='login')
+def myfooditemDelete(request, id):
+    try:
+        UserFooditem.fooditem.remove(Fooditem.objects.get(id=id))
+    except Exception as err:
+        print(err)
+        pass
+    return redirect('/')
 

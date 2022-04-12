@@ -26,4 +26,6 @@ urlpatterns = [
     path('reset_password_complete/',
          auth_views.PasswordResetCompleteView.as_view(),
          name="password_reset_complete"),
+     path('product/delete/<int:id>/',views.fooditemDelete,name='fooditem_delete'),
+     path('foodItem/delete/<int:id>/',views.myfooditemDelete,name='my_fooditem_delete')
 ]

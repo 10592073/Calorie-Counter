@@ -15,6 +15,7 @@
                     <th>Fats</th>
                     <th>Protien</th>
                     <th>Calorie</th>
+                    <th>Action</th>
                     
                 </tr>
                {% for items in breakfast %}
@@ -24,6 +25,7 @@
                     <td>{{items.fats}} </td>
                     <td>{{items.protein}} </td>
                     <td>{{items.calorie}} </td>
+                    <td><a href="{% url 'fooditem_delete' items.id %}" class="btn btn-outline-danger"><li class="fa fa-trash"></li></a></td>
                     </tr>
                     
                 {% endfor %}
@@ -43,6 +45,7 @@
                     <th>Fats</th>
                     <th>Protien</th>
                     <th>Calorie</th>
+                    <th>Action</th>
                     
                 </tr>
                {% for items in lunch %}
@@ -52,6 +55,7 @@
                     <td>{{items.fats}} </td>
                     <td>{{items.protein}} </td>
                     <td>{{items.calorie}} </td>
+                    <td><a href="{% url 'fooditem_delete' items.id %}" class="btn btn-outline-danger"><li class="fa fa-trash"></li></a></td>
                     </tr>
                     
                 {% endfor %}
@@ -71,6 +75,7 @@
                     <th>Fats</th>
                     <th>Protien</th>
                     <th>Calorie</th>
+                    <th>Action</th>
                     
                 </tr>
                {% for items in snacks %}
@@ -80,6 +85,7 @@
                     <td>{{items.fats}} </td>
                     <td>{{items.protein}} </td>
                     <td>{{items.calorie}} </td>
+                    <td><a href="{% url 'fooditem_delete' items.id %}" class="btn btn-outline-danger"><li class="fa fa-trash"></li></a></td>
                     </tr>
                     
                 {% endfor %}
@@ -98,6 +104,7 @@
                     <th>Fats</th>
                     <th>Protien</th>
                     <th>Calorie</th>
+                    <th>Action</th>
                 </tr>
                {% for items in dinner %}
                 <tr>
@@ -106,6 +113,7 @@
                     <td>{{items.fats}} </td>
                     <td>{{items.protein}} </td>
                     <td>{{items.calorie}} </td>
+                    <td><a href="{% url 'fooditem_delete' items.id %}" class="btn btn-outline-danger"><li class="fa fa-trash"></li></a></td>
                     </tr>
                     
                 {% endfor %}
